@@ -1,6 +1,8 @@
 # GradlePluginExample
 
-Example of a Gradle Plugin that can manage your version numbers. Based on a talk given by [Lisa Neigut at Droidcon London](https://skillsmatter.com/skillscasts/5625-gradlin-plugging-it-in-for-build-success).
+Example of a Gradle Plugin that can manage your version numbers. Based on a talk given by Lisa Neigut at Droidcon London 
+[(video)](https://skillsmatter.com/skillscasts/5625-gradlin-plugging-it-in-for-build-success)
+[(slides)](https://speakerdeck.com/niftynei/gradlin-plugging-it-in-for-build-success).
 
 The main code to look at in this project is located in the `buildSrc` folder. The only other thing to look at is the `build.gradle` file in the app folder. Everything else is just boilerplate.
 
