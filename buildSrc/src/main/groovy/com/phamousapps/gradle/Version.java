@@ -1,7 +1,7 @@
 package com.phamousapps.gradle;
 
 /**
- * Created by kevingrant on 11/16/14.
+ * Enum holding all of the versions to be bumped.
  */
 public enum Version {
 

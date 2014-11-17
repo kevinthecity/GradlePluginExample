@@ -11,7 +11,7 @@ class VersionsPlugin implements Plugin<Project> {
         project.extensions.create("appVersion", VersionExtension)
 
         // Load version from versions.gradle
-        project.appVersion.loadVersions(project)
+        project.appVersion.loadVersionsIntoProject(project)
 
         // Create the tasks
         project.afterEvaluate {
@@ -24,7 +24,7 @@ class VersionsPlugin implements Plugin<Project> {
                         project.appVersion.bump(version)
 
                         // Save File
-                        project.appVersion.saveVersionToFile(project);
+                        project.appVersion.saveVersionFile(project);
 
                         // Load into build
                         project.android.applicationVariants.all { variant ->
