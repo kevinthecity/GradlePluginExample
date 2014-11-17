@@ -19,3 +19,28 @@ NOTE: This project does not contain details on uploading the plugin to a remote 
 ## Running
 
 To see the new tasks you've added, type `./gradlew tasks` into the console, and notice that there are now 4 new tasks under "Other Tasks". You can run them individually (e.g. `./gradlew bumpMajor`), or you can run it as part of a full build (e.g. `./gradlew bumpMajor assembleDebug`).
+
+Example output:
+
+```
+./gradlew bumpMajor
+...
+:app:bumpMajor
+Previous Version: 1.0.0.0
+Current Version: 2.0.0.0
+
+
+./gradlew bumpMinor
+...
+:app:bumpMinor
+Previous Version: 2.0.0.0
+Current Version: 2.1.0.0
+
+
+./gradlew bumpMajor
+...
+:app:bumpMajor
+Previous Version: 2.1.0.0
+Current Version: 3.0.0.0
+```
+
