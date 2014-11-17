@@ -37,6 +37,7 @@ public class VersionExtension {
      * @return the version code as a number.
      */
     def versionCode() {
+        // Helper for Java programmers: 10**6 === Math.Pow(10, 6)
         (mVersionMap.get(Version.MAJOR.key) * 10**6) + (mVersionMap.get(Version.MINOR.key) * 10**4) +
                 (mVersionMap.get(Version.BUGFIX.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
     }
