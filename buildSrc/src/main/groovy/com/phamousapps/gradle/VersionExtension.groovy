@@ -33,7 +33,6 @@ public class VersionExtension {
     }
 
     def loadVersion(Project project) {
-
         def versionFile = new File(project.projectDir, VERSION_FILE_NAME)
         versionFile.eachLine { line ->
             if (line.contains('=')) {
@@ -41,11 +40,10 @@ public class VersionExtension {
                 project.appVersion.mVersionMap.put(key, Integer.parseInt(value));
             }
         }
-
         mOldVersion = versionName();
     }
 
-    def saveVersion(Project project) {
+    def saveVersionToFile(Project project) {
         // Write to file
         new File(project.projectDir, VERSION_FILE_NAME).withWriter { out ->
 

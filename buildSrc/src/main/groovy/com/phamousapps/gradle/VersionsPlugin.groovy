@@ -24,7 +24,7 @@ class VersionsPlugin implements Plugin<Project> {
                         project.appVersion.bump(version)
 
                         // Save File
-                        project.appVersion.saveVersions(project);
+                        project.appVersion.saveVersionToFile(project);
 
                         // Load into build
                         project.android.applicationVariants.all { variant ->
