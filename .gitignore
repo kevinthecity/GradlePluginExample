@@ -24,3 +24,6 @@ gradle.properties
 *.idea
 .gradle
 build/
+
+.DS_STORE
+.DS_Store
