@@ -13,3 +13,5 @@ When adding the `buildSrc` folder to your project, manually add the folders
       - `resources`
       
 After that, do a Gradle sync, and then your project should auto-generate the `.iml` and the `local.properties` files. At that point, you must also create a `build.gradle` for this plugin. At a minimum, it must have the same contents as the one in this projet, but you can flesh it out with more.
+
+NOTE: This project does not contain details on uploading the plugin to a remote repo or maven. This demo is only for adding the plugin code locally to your project.
