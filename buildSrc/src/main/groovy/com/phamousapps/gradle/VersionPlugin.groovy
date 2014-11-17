@@ -15,11 +15,9 @@ class VersionPlugin implements Plugin<Project> {
 
         // Create the tasks
         project.afterEvaluate {
-
             Version.values().each { version ->
                 project.tasks.create(name: "$version.taskName") {
                     doLast {
-
                         // Bump version
                         project.appVersion.bump(version)
 

@@ -11,10 +11,10 @@ public enum Version {
 	ALPHA("bumpAlpha", "alpha");
 
 	String taskName;
-	String versionKey;
+	String key;
 
 	Version(String taskName, String versionKey) {
 		this.taskName = taskName;
-		this.versionKey = versionKey;
+		this.key = versionKey;
 	}
 }

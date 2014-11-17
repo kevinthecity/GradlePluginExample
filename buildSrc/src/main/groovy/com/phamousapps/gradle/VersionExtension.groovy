@@ -9,14 +9,14 @@ public class VersionExtension {
 
     def String VERSION_FILE_NAME = "versions.gradle"
 
-    Map<Version, Integer> mVersionMap = new HashMap<>();
+    Map<String, Integer> mVersionMap = new HashMap<>();
     String mOldVersion;
 
     VersionExtension() {
-        mVersionMap.put(Version.MAJOR, 0);
-        mVersionMap.put(Version.MINOR, 0);
-        mVersionMap.put(Version.BUGFIX, 0);
-        mVersionMap.put(Version.ALPHA, 0);
+        mVersionMap.put(Version.MAJOR.key, 0);
+        mVersionMap.put(Version.MINOR.key, 0);
+        mVersionMap.put(Version.BUGFIX.key, 0);
+        mVersionMap.put(Version.ALPHA.key, 0);
 
         mOldVersion = null;
     }
@@ -26,10 +26,10 @@ public class VersionExtension {
      */
     def versionName() {
         StringBuilder builder = new StringBuilder();
-        builder.append(mVersionMap.get(Version.MAJOR)).append('.');
-        builder.append(mVersionMap.get(Version.MINOR)).append('.');
-        builder.append(mVersionMap.get(Version.BUGFIX)).append('.');
-        builder.append(mVersionMap.get(Version.ALPHA));
+        builder.append(mVersionMap.get(Version.MAJOR.key)).append('.');
+        builder.append(mVersionMap.get(Version.MINOR.key)).append('.');
+        builder.append(mVersionMap.get(Version.BUGFIX.key)).append('.');
+        builder.append(mVersionMap.get(Version.ALPHA.key));
         return builder.toString();
     }
 
@@ -37,8 +37,8 @@ public class VersionExtension {
      * @return the version code as a number.
      */
     def versionCode() {
-        (mVersionMap.get(Version.MAJOR) * 10**6) + (mVersionMap.get(Version.MINOR) * 10**4) +
-                (mVersionMap.get(Version.BUGFIX) * 10**2) + (mVersionMap.get(Version.ALPHA))
+        (mVersionMap.get(Version.MAJOR.key) * 10**6) + (mVersionMap.get(Version.MINOR.key) * 10**4) +
+                (mVersionMap.get(Version.BUGFIX.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
     }
 
     /**
@@ -49,7 +49,10 @@ public class VersionExtension {
         versionFile.eachLine { line ->
             if (line.contains('=')) {
                 def (key, value) = line.split('=').collect { it.trim() }
-                project.appVersion.mVersionMap.put(key, Integer.parseInt(value));
+                if (value == null || !value.isNumber()) {
+                    value = 0;
+                }
+                project.appVersion.mVersionMap.put(key, Integer.valueOf(value));
             }
         }
         mOldVersion = versionName();
@@ -63,10 +66,10 @@ public class VersionExtension {
         new File(project.projectDir, VERSION_FILE_NAME).withWriter { out ->
 
             StringBuilder builder = new StringBuilder();
-            builder.append(Version.MAJOR).append('=').append(mVersionMap.get(Version.MAJOR)).append('\n')
-            builder.append(Version.MINOR).append('=').append(mVersionMap.get(Version.MINOR)).append('\n')
-            builder.append(Version.BUGFIX).append('=').append(mVersionMap.get(Version.BUGFIX)).append('\n')
-            builder.append(Version.ALPHA).append('=').append(mVersionMap.get(Version.ALPHA))
+            builder.append(Version.MAJOR.key).append('=').append(mVersionMap.get(Version.MAJOR.key)).append('\n')
+            builder.append(Version.MINOR.key).append('=').append(mVersionMap.get(Version.MINOR.key)).append('\n')
+            builder.append(Version.BUGFIX.key).append('=').append(mVersionMap.get(Version.BUGFIX.key)).append('\n')
+            builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key))
 
             out.write(builder.toString())
         }
@@ -78,27 +81,27 @@ public class VersionExtension {
     def bump(Version version) {
 
         switch (version) {
-        case Version.MAJOR:
-            mVersionMap.put(Version.MAJOR, mVersionMap.get(Version.MAJOR) + 1);
-            mVersionMap.put(Version.MINOR, 0);
-            mVersionMap.put(Version.BUGFIX, 0);
-            mVersionMap.put(Version.ALPHA, 0);
+            case Version.MAJOR:
+                mVersionMap.put(Version.MAJOR.key, mVersionMap.get(Version.MAJOR.key) + 1);
+                mVersionMap.put(Version.MINOR.key, 0);
+                mVersionMap.put(Version.BUGFIX.key, 0);
+                mVersionMap.put(Version.ALPHA.key, 0);
 
-            break;
-        case Version.MINOR:
-            mVersionMap.put(Version.MINOR, mVersionMap.get(Version.MINOR) + 1);
-            mVersionMap.put(Version.BUGFIX, 0);
-            mVersionMap.put(Version.ALPHA, 0);
+                break;
+            case Version.MINOR:
+                mVersionMap.put(Version.MINOR.key, mVersionMap.get(Version.MINOR.key) + 1);
+                mVersionMap.put(Version.BUGFIX.key, 0);
+                mVersionMap.put(Version.ALPHA.key, 0);
 
-            break;
-        case Version.BUGFIX:
-            mVersionMap.put(Version.BUGFIX, mVersionMap.get(Version.BUGFIX) + 1);
-            mVersionMap.put(Version.ALPHA, 0);
+                break;
+            case Version.BUGFIX:
+                mVersionMap.put(Version.BUGFIX.key, mVersionMap.get(Version.BUGFIX.key) + 1);
+                mVersionMap.put(Version.ALPHA.key, 0);
 
-            break;
-        case Version.ALPHA:
-            mVersionMap.put(Version.ALPHA, mVersionMap.get(Version.ALPHA) + 1);
-            break;
+                break;
+            case Version.ALPHA:
+                mVersionMap.put(Version.ALPHA.key, mVersionMap.get(Version.ALPHA.key) + 1);
+                break;
         }
 
         println("Previous Version: $mOldVersion");
