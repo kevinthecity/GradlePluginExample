@@ -4,7 +4,7 @@ import org.gradle.api.Project
 
 public class VersionExtension {
 
-    def String VERSION_FILE_NAME = "Version.gradle"
+    def String VERSION_FILE_NAME = "versions.gradle"
 
     Map<Version, Integer> mVersionMap = new HashMap<>();
     String mOldVersion;
