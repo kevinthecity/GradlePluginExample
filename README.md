@@ -23,6 +23,16 @@ To see the new tasks you've added, type `./gradlew tasks` into the console, and 
 Example output:
 
 ```
+
+./gradlew tasks
+...
+Other tasks
+-----------
+bumpAlpha
+bumpBugFix
+bumpMajor
+bumpMinor
+
 ./gradlew bumpMajor
 ...
 :app:bumpMajor
