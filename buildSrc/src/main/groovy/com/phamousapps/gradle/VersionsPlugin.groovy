@@ -13,12 +13,19 @@ class VersionsPlugin implements Plugin<Project> {
         // Load version from versions.gradle
         project.appVersion.loadVersions(project)
 
+        println("loaded versions")
+
         // Create the tasks
         project.afterEvaluate {
+
+            println("After evaluate")
 
             Versions.TASKS.each { versionTask ->
                 project.tasks.create(name: "$versionTask.taskName") {
                     doLast {
+
+                        println("DoLast")
+
                         // Bump version
                         project.appVersion.bump(versionTask.versionVariable)
 
