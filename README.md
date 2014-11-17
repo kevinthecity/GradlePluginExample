@@ -1,5 +1,4 @@
 # GradlePluginExample
-===================
 
 Example of a Gradle Plugin that can manage your version numbers. Based on a talk given by [Lisa Neigut at Droidcon London](https://skillsmatter.com/skillscasts/5625-gradlin-plugging-it-in-for-build-success).
 
