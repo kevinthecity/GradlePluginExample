@@ -46,15 +46,22 @@ public class VersionExtension {
      */
     def loadVersionsIntoProject(Project project) {
         def versionFile = new File(project.projectDir, VERSION_FILE_NAME)
-        versionFile.eachLine { line ->
-            if (line.contains('=')) {
-                def (key, value) = line.split('=').collect { it.trim() }
-                if (value == null || !value.isNumber()) {
-                    value = 0;
+        if (versionFile.exists()) {
+            versionFile.eachLine { line ->
+                if (line.contains('=')) {
+                    def (key, value) = line.split('=').collect { it.trim() }
+                    if (value == null || !value.isNumber()) {
+                        value = 0;
+                    }
+                    project.appVersion.mVersionMap.put(key, Integer.valueOf(value));
                 }
-                project.appVersion.mVersionMap.put(key, Integer.valueOf(value));
             }
+
+        } else {
+            // Create an empty file
+            saveVersionFile(project);
         }
+
         mOldVersion = versionName();
     }
 
