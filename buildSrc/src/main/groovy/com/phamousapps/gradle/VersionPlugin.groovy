@@ -3,7 +3,7 @@ package com.phamousapps.gradle
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class VersionsPlugin implements Plugin<Project> {
+class VersionPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
