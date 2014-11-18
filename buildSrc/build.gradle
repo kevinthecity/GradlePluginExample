@@ -7,7 +7,8 @@ dependencies {
 
 allprojects {
 
-    group = 'com.phamousapps.gradle'
-    version = '0.0.1-SNAPSHOT'
+// How to add group and version, not necessary for adding as jar
+//    group = 'com.phamousapps.gradle'
+//    version = '0.0.1-SNAPSHOT'
 
 }
