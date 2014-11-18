@@ -7,7 +7,7 @@ public enum Version {
 
 	// Example version 3.7.3.0
 
-	ERA("bumpEra", "major"),
+	ERA("bumpEra", "era"),
 	MAJOR("bumpMajor", "major"),
 	MINOR("bumpMinor", "minor"),
 	ALPHA("bumpAlpha", "alpha");
