@@ -13,9 +13,9 @@ public class VersionExtension {
     String mOldVersion;
 
     VersionExtension() {
+        mVersionMap.put(Version.ERA.key, 0);
         mVersionMap.put(Version.MAJOR.key, 0);
         mVersionMap.put(Version.MINOR.key, 0);
-        mVersionMap.put(Version.BUGFIX.key, 0);
         mVersionMap.put(Version.ALPHA.key, 0);
 
         mOldVersion = null;
@@ -26,9 +26,9 @@ public class VersionExtension {
      */
     def versionName() {
         StringBuilder builder = new StringBuilder();
+        builder.append(mVersionMap.get(Version.ERA.key)).append('.');
         builder.append(mVersionMap.get(Version.MAJOR.key)).append('.');
         builder.append(mVersionMap.get(Version.MINOR.key)).append('.');
-        builder.append(mVersionMap.get(Version.BUGFIX.key)).append('.');
         builder.append(mVersionMap.get(Version.ALPHA.key));
         return builder.toString();
     }
@@ -38,8 +38,8 @@ public class VersionExtension {
      */
     def versionCode() {
         // Helper for Java programmers: 10**6 === Math.Pow(10, 6)
-        (mVersionMap.get(Version.MAJOR.key) * 10**6) + (mVersionMap.get(Version.MINOR.key) * 10**4) +
-                (mVersionMap.get(Version.BUGFIX.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
+        (mVersionMap.get(Version.ERA.key) * 10**6) + (mVersionMap.get(Version.MAJOR.key) * 10**4) +
+                (mVersionMap.get(Version.MINOR.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
     }
 
     /**
@@ -74,9 +74,9 @@ public class VersionExtension {
         new File(project.projectDir, VERSION_FILE_NAME).withWriter { out ->
 
             StringBuilder builder = new StringBuilder();
+            builder.append(Version.ERA.key).append('=').append(mVersionMap.get(Version.ERA.key)).append('\n')
             builder.append(Version.MAJOR.key).append('=').append(mVersionMap.get(Version.MAJOR.key)).append('\n')
             builder.append(Version.MINOR.key).append('=').append(mVersionMap.get(Version.MINOR.key)).append('\n')
-            builder.append(Version.BUGFIX.key).append('=').append(mVersionMap.get(Version.BUGFIX.key)).append('\n')
             builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key))
 
             out.write(builder.toString())
@@ -89,21 +89,21 @@ public class VersionExtension {
     def bump(Version version) {
 
         switch (version) {
+            case Version.ERA:
+                mVersionMap.put(Version.ERA.key, mVersionMap.get(Version.ERA.key) + 1);
+                mVersionMap.put(Version.MAJOR.key, 0);
+                mVersionMap.put(Version.MINOR.key, 0);
+                mVersionMap.put(Version.ALPHA.key, 0);
+
+                break;
             case Version.MAJOR:
                 mVersionMap.put(Version.MAJOR.key, mVersionMap.get(Version.MAJOR.key) + 1);
                 mVersionMap.put(Version.MINOR.key, 0);
-                mVersionMap.put(Version.BUGFIX.key, 0);
                 mVersionMap.put(Version.ALPHA.key, 0);
 
                 break;
             case Version.MINOR:
                 mVersionMap.put(Version.MINOR.key, mVersionMap.get(Version.MINOR.key) + 1);
-                mVersionMap.put(Version.BUGFIX.key, 0);
-                mVersionMap.put(Version.ALPHA.key, 0);
-
-                break;
-            case Version.BUGFIX:
-                mVersionMap.put(Version.BUGFIX.key, mVersionMap.get(Version.BUGFIX.key) + 1);
                 mVersionMap.put(Version.ALPHA.key, 0);
 
                 break;

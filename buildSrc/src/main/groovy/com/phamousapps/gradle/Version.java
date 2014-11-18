@@ -5,9 +5,11 @@ package com.phamousapps.gradle;
  */
 public enum Version {
 
+	// Example version 3.7.3.0
+
+	ERA("bumpEra", "major"),
 	MAJOR("bumpMajor", "major"),
 	MINOR("bumpMinor", "minor"),
-	BUGFIX("bumpBugFix", "bugFix"),
 	ALPHA("bumpAlpha", "alpha");
 
 	String taskName;
