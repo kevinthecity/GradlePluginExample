@@ -37,9 +37,14 @@ public class VersionExtension {
      * @return the version code as a number.
      */
     def versionCode() {
-        // Helper for Java programmers: 10**6 === Math.Pow(10, 6)
-        (mVersionMap.get(Version.ERA.key) * 10**6) + (mVersionMap.get(Version.MAJOR.key) * 10**4) +
-                (mVersionMap.get(Version.MINOR.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("14")
+                .append(mVersionMap.get(Version.ERA.key))
+                .append(mVersionMap.get(Version.MAJOR.key))
+                .append(mVersionMap.get(Version.MINOR.key))
+                .append(mVersionMap.get(Version.ALPHA.key))
+        return Integer.parseInt(builder.toString());
     }
 
     /**
@@ -113,7 +118,8 @@ public class VersionExtension {
         }
 
         println("Previous Version: $mOldVersion");
-        println("Current Version: " + versionName());
+        println("Current Version Name: " + versionName());
+        println("Current Version Code: " + versionCode());
         mOldVersion = versionName();
     }
 }
