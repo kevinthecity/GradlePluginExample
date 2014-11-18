@@ -43,7 +43,12 @@ public class VersionExtension {
                 .append(mVersionMap.get(Version.ERA.key))
                 .append(mVersionMap.get(Version.MAJOR.key))
                 .append(mVersionMap.get(Version.MINOR.key))
-                .append(mVersionMap.get(Version.ALPHA.key))
+
+        int alphaVersion = mVersionMap.get(Version.ALPHA.key);
+        if(alphaVersion < 10){
+            builder.append("0")
+        }
+        builder.append(alphaVersion)
         return Integer.parseInt(builder.toString());
     }
 
@@ -82,7 +87,7 @@ public class VersionExtension {
             builder.append(Version.ERA.key).append('=').append(mVersionMap.get(Version.ERA.key)).append('\n')
             builder.append(Version.MAJOR.key).append('=').append(mVersionMap.get(Version.MAJOR.key)).append('\n')
             builder.append(Version.MINOR.key).append('=').append(mVersionMap.get(Version.MINOR.key)).append('\n')
-            builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key))
+            builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key)).append('\n')
 
             out.write(builder.toString())
         }
