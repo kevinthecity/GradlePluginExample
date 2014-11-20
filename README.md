@@ -17,6 +17,30 @@ After that, do a Gradle sync, and then your project should auto-generate the `.i
 
 NOTE: This project does not contain details on uploading the plugin to a remote repo or maven. This demo is only for adding the plugin code locally to your project.
 
+## Add jar to your project
+
+If you build this example in a separate project, and you would like to add the generated jar (located in `buildSrc/build/libs/buildSrc.jar`) to another project, drop that jar into your projects `/libs` folder, and add this to your apps build.gradle
+
+```
+buildscript {
+    buildscript {
+        repositories {
+            flatDir dirs: "libs"
+        }
+        dependencies {
+            classpath "com.phamousapps.gradle:buildSrc"
+        }
+    }
+}
+
+apply plugin: 'appVersion'
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+```
+
+
 ## Running
 
 To see the new tasks you've added, type `./gradlew tasks` into the console, and notice that there are now 4 new tasks under "Other Tasks". You can run them individually (e.g. `./gradlew bumpMajor`), or you can run it as part of a full build (e.g. `./gradlew bumpMajor assembleDebug`).
