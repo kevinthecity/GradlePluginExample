@@ -77,7 +77,7 @@ public class VersionExtension {
             builder.append(Version.MAJOR.key).append('=').append(mVersionMap.get(Version.MAJOR.key)).append('\n')
             builder.append(Version.MINOR.key).append('=').append(mVersionMap.get(Version.MINOR.key)).append('\n')
             builder.append(Version.BUGFIX.key).append('=').append(mVersionMap.get(Version.BUGFIX.key)).append('\n')
-            builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key))
+            builder.append(Version.ALPHA.key).append('=').append(mVersionMap.get(Version.ALPHA.key)).append('\n')
 
             out.write(builder.toString())
         }
